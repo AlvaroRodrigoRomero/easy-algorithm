@@ -7,7 +7,6 @@ export default class BreadCrumbs extends Component {
         paths = paths[paths.length - 1] === "" ? paths.slice(0, paths.length - 1) : paths;
         paths = paths[1] === "" ? paths.slice(1) : paths;
         var breadcrumb = paths.map((path, index) => {
-            var arrow = index !== paths.length - 1 ? " > " : " ";
             if (index === 0)
                 return ({ path: "/", name: "Home" });
 
@@ -23,7 +22,9 @@ export default class BreadCrumbs extends Component {
             return (
                 <Breadcrumb>
                     {breadcrumb.map((item, index) => {
-                        return <Breadcrumb.Item active={index == breadcrumb.length - 1}
+                        return <Breadcrumb.Item
+                            key={index}
+                            active={index === breadcrumb.length - 1}
                             href={item.path}>{item.name}
                         </Breadcrumb.Item>
                     })}
